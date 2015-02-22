@@ -1,0 +1,33 @@
+{
+    "name": "campaignchain/channel-mailchimp",
+    "description": "Connects to MailChimp.",
+    "type": "campaignchain-channel",
+    "license": "Apache-2.0",
+    "homepage": "http://www.campaignchain.com",
+    "authors": [
+        {
+            "name": "Sandro Groganz",
+            "email": "sandro@campaignchain.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": { "CampaignChain\\Channel\\MailChimpBundle\\": "" }
+    },
+    "extra": {
+        "campaignchain": {
+            "kernel": {
+                "classes": [
+                    "CampaignChain\\Channel\\MailChimpBundle\\CampaignChainChannelMailChimpBundle"
+                ],
+                "routing":
+                {
+                    "name": "campaignchain_channel_mailchimp",
+                    "resource": "@CampaignChainChannelMailChimpBundle/Resources/config/routing.yml",
+                    "prefix": "/"
+                }
+            }
+        }
+    }
+}

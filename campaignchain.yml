@@ -1,0 +1,8 @@
+
+modules:
+    campaignchain-mailchimp:
+        display_name: MailChimp
+        description: Connects to MailChimp.
+        routes: 
+            new: campaignchain_channel_mailchimp_create
+        hooks:
