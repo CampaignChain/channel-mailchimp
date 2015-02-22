@@ -28,7 +28,7 @@ class MailChimpController extends Controller
         'parameters' => array(),
         'wrapper' => array(
             'class'=>'Hybrid_Providers_MailChimp',
-            'path' => 'src/CampaignChain/Channel/MailChimpBundle/REST/MailChimpOAuth.php'
+            'path' => 'vendor/campaignchain/channel-mailchimp/REST/MailChimpOAuth.php'
         ),
     );
 
