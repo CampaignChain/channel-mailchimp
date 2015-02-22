@@ -11,6 +11,7 @@
         }
     ],
     "require": {
+        "campaignchain/core": "dev-master"
     },
     "autoload": {
         "psr-4": { "CampaignChain\\Channel\\MailChimpBundle\\": "" }
