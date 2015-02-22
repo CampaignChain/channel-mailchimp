@@ -32,12 +32,6 @@ class MailChimpClient
     }
 
     public function connectByLocation($location){
-
-        $this->organizerKey = $location->getIdentifier();
-
-        $oauthApp = $this->container->get('campaignchain.security.authentication.client.oauth.application');
-        $application = $oauthApp->getApplication(self::RESOURCE_OWNER);
-
         // Get Access Token and Token Secret
         $oauthToken = $this->container->get('campaignchain.security.authentication.client.oauth.token');
         $token = $oauthToken->getToken($location);
@@ -46,6 +40,6 @@ class MailChimpClient
     }
 
     public function connect($apiKey){
-
+        return false;
     }
 }
