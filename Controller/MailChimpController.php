@@ -71,6 +71,7 @@ class MailChimpController extends Controller
                 $location = new Location();
                 $location->setIdentifier($profile->identifier);
                 $location->setName($profile->displayName);
+                $location->setImage($profile->photoURL);
                 $location->setLocationModule($locationModule);
                 $wizard->addLocation($location->getIdentifier(), $location);
 
