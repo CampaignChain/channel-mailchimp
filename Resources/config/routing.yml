@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 campaignchain_channel_mailchimp_create:
-    pattern: /activity/mailchimp/create
+    pattern: /channel/mailchimp/create
     defaults: { _controller: CampaignChainChannelMailChimpBundle:MailChimp:create }
 
 campaignchain_channel_mailchimp_login:

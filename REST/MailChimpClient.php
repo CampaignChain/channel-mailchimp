@@ -37,11 +37,36 @@ class MailChimpClient
         return $this->connect($token->getAccessToken(), $token->getEndpoint());
     }
 
+    public function connectByNewsletterId($newsletterId)
+    {
+        $newsletter = $this->container->get('doctrine')->getRepository('CampaignChainOperationMailChimpBundle:MailChimpNewsletter')
+            ->findOneByCampaignId($newsletterId);
+
+        if (!$newsletter) {
+            throw new \Exception(
+                'No newsletter found with MailChimp Campaign ID '.$id
+            );
+        }
+
+        return $this->connectByActivity($newsletter->getOperation()->getActivity());
+    }
+
     public function connect($apiKey, $endpoint){
         $dc = explode('.', parse_url($endpoint, PHP_URL_HOST))[0];
 
         $this->client = new \Mailchimp($apiKey.'-'.$dc);
 
         return $this->client;
+    }
+
+    public function getNewsletterPreview($mailchimpCampaignId)
+    {
+        $newsletterContent = $this->client->campaigns->content(
+            $mailchimpCampaignId,
+            array(
+                'view' => 'preview',
+            ));
+
+        return $newsletterContent['html'];
     }
 }
