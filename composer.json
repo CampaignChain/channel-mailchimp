@@ -1,6 +1,6 @@
 {
     "name": "campaignchain/channel-mailchimp",
-    "description": "Connects to MailChimp.",
+    "description": "Connect to MailChimp.",
     "keywords": ["mailchimp","campaignchain"],
     "type": "campaignchain-channel",
     "license": "Apache-2.0",
