@@ -6,6 +6,7 @@
 # file that was distributed with this source code.
 
 services:
-#    campaign_chain_channel_mail_chimp.example:
-#        class: CampaignChain\Channel\MailChimpBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    campaignchain.channel.mailchimp.rest.client:
+        class: CampaignChain\Channel\MailChimpBundle\REST\MailChimpClient
+        calls:
+            - [setContainer, ["@service_container"]]
