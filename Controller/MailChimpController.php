@@ -126,7 +126,7 @@ class MailChimpController extends Controller
         return $this->render(
             'CampaignChainChannelMailChimpBundle:Create:login.html.twig',
             array(
-                'redirect' => $this->generateUrl('campaignchain_core_channel')
+                'redirect' => $this->generateUrl('campaignchain_core_location')
             )
         );
     }
