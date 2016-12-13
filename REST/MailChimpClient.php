@@ -118,4 +118,9 @@ class MailChimpClient
     {
         return $this->client->post('campaigns/'.$id.'/actions/send');
     }
+
+    public function getCampaignReport($id)
+    {
+        return $this->client->get('reports/'.$id);
+    }
 }
