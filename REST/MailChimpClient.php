@@ -17,6 +17,7 @@
 
 namespace CampaignChain\Channel\MailChimpBundle\REST;
 
+use DrewM\MailChimp\MailChimp;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class MailChimpClient
@@ -25,6 +26,7 @@ class MailChimpClient
 
     protected $container;
 
+    /** @var  MailChimp */
     protected $client;
 
     public function setContainer($container)
@@ -44,10 +46,10 @@ class MailChimpClient
         return $this->connect($token->getAccessToken(), $token->getEndpoint());
     }
 
-    public function connectByNewsletterId($newsletterId)
+    public function connectByCampaignId($campaignId)
     {
         $newsletter = $this->container->get('doctrine')->getRepository('CampaignChainOperationMailChimpBundle:MailChimpNewsletter')
-            ->findOneByCampaignId($newsletterId);
+            ->findOneByCampaignId($campaignId);
 
         if (!$newsletter) {
             throw new \Exception(
@@ -61,19 +63,59 @@ class MailChimpClient
     public function connect($apiKey, $endpoint){
         $dc = explode('.', parse_url($endpoint, PHP_URL_HOST))[0];
 
-        $this->client = new \Mailchimp($apiKey.'-'.$dc);
+        $this->client = new MailChimp($apiKey.'-'.$dc);
 
-        return $this->client;
+        return $this;
     }
 
-    public function getNewsletterPreview($mailchimpCampaignId)
+    public function getUnpublishedCampaigns()
     {
-        $newsletterContent = $this->client->campaigns->content(
-            $mailchimpCampaignId,
-            array(
-                'view' => 'preview',
-            ));
+        $args = array(
+            'status' => 'save,paused,schedule',
+        );
+
+        return $this->client->get('campaigns', $args);
+    }
+
+    public function getCampaign($id)
+    {
+        return $this->client->get('campaigns/'.$id);
+    }
+
+    public function getCampaignHTML($id)
+    {
+        $newsletterContent = $this->client->get(
+            'campaigns/'.$id.'/content'
+        );
 
         return $newsletterContent['html'];
+    }
+
+    public function resetCampaignTemplate($id)
+    {
+        $args = array(
+            'template_id' => null,
+        );
+
+        return $this->client->patch('campaigns/'.$id, $args);
+    }
+
+    public function updateCampaignHTML($id, $html)
+    {
+        $args = array(
+            'html' => $html,
+        );
+
+        return $this->client->put('campaigns/'.$id.'/content', $args);
+    }
+
+    public function getCampaignSendChecklist($id)
+    {
+        return $this->client->get('campaigns/'.$id.'/send-checklist');
+    }
+
+    public function sendCampaign($id)
+    {
+        return $this->client->post('campaigns/'.$id.'/actions/send');
     }
 }
