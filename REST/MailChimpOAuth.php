@@ -47,7 +47,6 @@ class Hybrid_Providers_MailChimp extends Hybrid_Provider_Model_OAuth2
         }
 
         $this->user->profile->identifier    = @ $data->global_user_id;
-        $this->user->profile->username      = @ $data->username;
         $this->user->profile->displayName   = @ $data->name;
         $this->user->profile->email         = @ $data->email;
         $this->user->profile->photoURL      = @ $data->avatar;

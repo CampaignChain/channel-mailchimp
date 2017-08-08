@@ -90,7 +90,6 @@ class MailChimpController extends Controller
                 $user = new MailChimpUser();
                 $user->setLocation($channel->getLocations()[0]);
                 $user->setIdentifier($profile->identifier);
-                $user->setUsername($profile->username);
                 $user->setDisplayName($profile->displayName);
                 $user->setFirstName($profile->firstName);
                 $user->setLastName($profile->lastName);
