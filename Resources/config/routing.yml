@@ -13,9 +13,9 @@
 # limitations under the License.
 
 campaignchain_channel_mailchimp_create:
-    pattern: /channel/mailchimp/create
+    path: /channel/mailchimp/create
     defaults: { _controller: CampaignChainChannelMailChimpBundle:MailChimp:create }
 
 campaignchain_channel_mailchimp_login:
-    pattern:  /channel/mailchimp/create/login
+    path:  /channel/mailchimp/create/login
     defaults: { _controller: CampaignChainChannelMailChimpBundle:MailChimp:login }
